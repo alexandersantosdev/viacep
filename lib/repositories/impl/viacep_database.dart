@@ -1,6 +1,5 @@
 import 'package:viacep/http/viacep_database_dio.dart';
 import 'package:viacep/models/viacep_model.dart';
-import 'package:viacep/models/viacep_new.dart';
 import 'package:viacep/repositories/viacep_database.dart';
 
 class ViaCepDatabaseImpl extends ViaCepDatabase {
@@ -44,12 +43,16 @@ class ViaCepDatabaseImpl extends ViaCepDatabase {
   }
 
   @override
-  Future<ViaCepNewModel> saveAddress(Results address) async {
+  Future<void> saveAddress(Results address) async {
     ViaCepDioDatabase viaCepDio = ViaCepDioDatabase();
-    var response = await viaCepDio.dio.post("viacep", data: address.toJson());
-    if (response.statusCode == 201) {
-      return ViaCepNewModel.fromJson(response.data);
+    var alreadyExists = await getAddress(address.cep!);
+    if (alreadyExists.results!.isEmpty) {
+      var response = await viaCepDio.dio.post("viacep", data: address.toJson());
+      if (response.statusCode == 201) {
+        return;
+      }
+      throw "Erro ao salvar endereço";
     }
-    return ViaCepNewModel();
+    throw "Endereço já cadastrado";
   }
 }

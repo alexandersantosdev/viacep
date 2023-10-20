@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:viacep/pages/home_page.dart';
 import 'package:viacep/shared/constants.dart';
 import 'package:viacep/shared/menu_item.dart';
 

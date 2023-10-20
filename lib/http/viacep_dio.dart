@@ -5,7 +5,7 @@ class ViaCepDio {
   final _dio = Dio();
 
   ViaCepDio() {
-    _dio.options.baseUrl = dotenv.get('VIACEP_BASE_URL');
+    _dio.options.baseUrl = dotenv.get('VIA_CEP_URL');
   }
   Dio get dio => _dio;
 }

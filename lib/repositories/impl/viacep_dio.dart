@@ -4,15 +4,15 @@ import 'package:viacep/repositories/viacep.dart';
 
 class ViaCepImpl extends ViaCep {
   @override
-  Future<ViaCepModel> getAddress(String cep) async {
+  Future<Results> getAddress(String cep) async {
     ViaCepDio viaCepDio = ViaCepDio();
     var response = await viaCepDio.dio.get("$cep/json");
     
     if (response.statusCode == 200) {
-      var viaCepModel = ViaCepModel.fromJson(response.data);
+      var viaCepModel = Results.fromJson(response.data);
       return viaCepModel;
     }
 
-    return ViaCepModel();
+    return Results();
   }
 }

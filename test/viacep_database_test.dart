@@ -14,10 +14,10 @@ void main() {
     ViaCepModel cep = await viacepDatabase.getAllAddresses();
     debugPrint(cep.results![0].logradouro);
   });
-  test('add a new ceps with viacep database', () async {
+  test('add a new cep with viacep database', () async {
     var viacepDatabase = ViaCepDatabaseImpl();
     var address = Results(
-      cep: "01001-000",
+      cep: "01001000",
       logradouro: "Praça da Sé",
       complemento: "lado ímpar",
       bairro: "Sé",
@@ -26,11 +26,10 @@ void main() {
       ibge: "3550308",
     );
 
-    var newAddress = await viacepDatabase.saveAddress(address);
-    debugPrint(newAddress.objectId);
+    await viacepDatabase.saveAddress(address);
   });
-  test('delete one ceps with viacep database', () async {
+  test('delete one cep with viacep database', () async {
     var viacepDatabase = ViaCepDatabaseImpl();
-    await viacepDatabase.deleteAddress('YaecJynmYM');
+    await viacepDatabase.deleteAddress('');
   });
 }
